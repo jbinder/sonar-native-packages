@@ -14,7 +14,7 @@ VER=$1
 
 echo "Building DEB package"
 rm -v deb/*.zip || true
-cp /usr/distfiles/sonar-${VER}.zip deb/
+cp distfiles/sonar-${VER}.zip deb/
 cd deb/
 ./build.sh ${VER}
 cd ..

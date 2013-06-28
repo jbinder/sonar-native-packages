@@ -14,8 +14,8 @@ fi
 VER=$1
 
 # prepare fresh directories
-rm -rv tmp/
-mkdir -p tmp/DEBIAN/
+rm -rv tmp/ || true
+mkdir -p tmp/DEBIAN/ || true
 
 # changelog
 DATE=`date -R`
