@@ -11,10 +11,16 @@ fetch_sources()
 {
   mkdir -p distfiles
   pushd distfiles
-  sonarFile=sonar-${VER}.zip
+  
+  sonarName="sonar"
+  isMainVersionHigherThan3=$(str=$(printf "%s >= %s" $(echo ${VER} | cut -f1 -d".") 4); echo $str | bc)
+  if [ ${isMainVersionHigherThan3} -eq 1 ]; then
+    sonarName="sonarqube"
+  fi
+  sonarFile=${sonarName}-${VER}.zip
   if [ ! -e "${sonarFile}" ]; then
     rm -v sonar-*.zip || true
-    wget  http://dist.sonar.codehaus.org/sonar-${VER}.zip
+    wget  http://dist.sonar.codehaus.org/${sonarFile}
   fi
   popd
 }
