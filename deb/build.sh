@@ -12,6 +12,7 @@ if [ -z "$1" ]; then
 fi
 
 VER=$1
+PROVISIONING_SCRIPT=$2
 
 # prepare fresh directories
 rm -rv tmp/ || true
@@ -65,6 +66,15 @@ cp -T debian/sonar.postinst tmp/DEBIAN/postinst
 chmod 755 tmp/DEBIAN/postinst
 cp -T debian/sonar.postrm tmp/DEBIAN/postrm
 chmod 755 tmp/DEBIAN/postrm
+
+# execute custom provisioning script
+echo $2
+echo ${PROVISIONING_SCRIPT}
+if [ -f ${PROVISIONING_SCRIPT} ]
+then
+    echo "executing: ${PROVISIONING_SCRIPT}"
+    ${PROVISIONING_SCRIPT}
+fi
 
 dpkg-gencontrol -Ptmp
 

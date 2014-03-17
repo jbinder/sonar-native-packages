@@ -6,11 +6,12 @@
 set -e
 
 if [ -z "$1" ]; then
-  echo "Usage: $0 <version>"
+  echo "Usage: $0 <version> [<custom provisioning script>]"
   exit 1
 fi
 
 VER=$1
+PROVISIONING_SCRIPT=$2
 sonarName="sonar"
 isMainVersionHigherThan3=$(str=$(printf "%s >= %s" $(echo ${VER} | cut -f1 -d".") 4); echo $str | bc)
 if [ ${isMainVersionHigherThan3} -eq 1 ]; then
@@ -21,7 +22,7 @@ echo "Building DEB package"
 rm -v deb/*.zip || true
 cp distfiles/${sonarName}-${VER}.zip deb/
 cd deb/
-./build.sh ${VER}
+./build.sh ${VER} ${SCRIPT} ${PROVISIONING_SCRIPT}
 cd ..
 
 echo "Building DEB repository"

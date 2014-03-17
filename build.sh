@@ -27,7 +27,8 @@ fetch_sources()
 
 
 VER=$1
+PROVISIONING_SCRIPT=$2
 fetch_sources
 
-./build-deb.sh $1
-./build-rpm.sh $1
+./build-deb.sh $1 ${PROVISIONING_SCRIPT}
+./build-rpm.sh $1 ${PROVISIONING_SCRIPT}
